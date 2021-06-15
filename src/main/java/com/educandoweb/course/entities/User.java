@@ -2,9 +2,21 @@ package com.educandoweb.course.entities;
 
 import java.io.Serializable;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+// mapeamento obj p/ bco dados relacional
+@Entity
 public class User implements Serializable{
 
 	private static final long serialVersionUID = 1L;
+	
+//informando chave principal
+	@Id	
+// informa auto incrementação
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String name;
 	private String telefone;
