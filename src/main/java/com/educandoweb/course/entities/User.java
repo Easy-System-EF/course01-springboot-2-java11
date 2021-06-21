@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 // mapeamento obj p/ bco dados relacional
 @Entity
 //anotação para conflito de palavras reservadas, ou aqq mudo o nome da tabela
@@ -30,7 +32,9 @@ public class User implements Serializable{
 	private String password;
 
 // instanciando associação user (1) com varios pedidos(0rder)
-//	asociacao um para muitos mapeado por cliente	
+//	asociacao um para muitos mapeado por cliente
+// anotação p/ não ter looping (jsonignore)	
+	@JsonIgnore
 	@OneToMany(mappedBy = "client")
 	private List<Order> orders = new ArrayList<>();
 	
