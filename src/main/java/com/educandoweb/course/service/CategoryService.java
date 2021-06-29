@@ -16,7 +16,7 @@ import com.educandoweb.course.repositories.CategoryRepository;
 @Service
 public class CategoryService {
 
-// dependencia do user repository com injeção transparente autowired
+// dependencia do category repository com injeção transparente autowired
 	
 	@Autowired
 	private CategoryRepository repository;

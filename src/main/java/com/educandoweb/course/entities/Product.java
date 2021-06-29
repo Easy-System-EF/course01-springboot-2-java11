@@ -8,8 +8,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 @Entity
 //anotação para conflito de palavras reservadas, ou aqq mudo o nome da tabela
@@ -28,11 +30,19 @@ public class Product implements Serializable {
 	private Double price;
 	private String imgUrl;
 	
-// associação via coleção instanciada para não começar = null, tem q ser vazio
-// set p/ não duplicar categorias
-// set é uma interface, por isso a classe hashset para instanciar
-// trasiente impede que jpa interprete essa associação	
+/*	
+   associação via coleção instanciada para não começar = null, tem q ser vazio
+   set p/ não duplicar categorias
+   set é uma interface, por isso a classe hashset para instanciar
+   trasiente impede que jpa interprete essa associação antes do mapeamento relacional jpa	
 	@Transient
+	mapeamento transf coleção na tab de associação do modelo relacional
+*/	
+ 	@ManyToMany
+ 	// nome da tabela e quais as chaves estrangeiras que associarão tabelas
+	@JoinTable(name = "tb_product_category", 
+	 joinColumns = @JoinColumn(name = "product_id"),
+	 inverseJoinColumns = @JoinColumn(name = "category_id"))
 	private Set<Category> categories = new HashSet<>();
 	
 	public Product() {

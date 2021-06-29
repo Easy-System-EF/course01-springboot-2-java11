@@ -16,7 +16,7 @@ import com.educandoweb.course.repositories.ProductRepository;
 @Service
 public class ProductService {
 
-// dependencia do user repository com injeção transparente autowired
+// dependencia do product repository com injeção transparente autowired
 	
 	@Autowired
 	private ProductRepository repository;

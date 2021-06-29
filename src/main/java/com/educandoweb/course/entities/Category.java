@@ -8,9 +8,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+ 
+ 
 @Entity
 // anotação para conflito de palavras reservadas, ou aqq mudo o nome da tabela
 @Table(name = "tb_category")
@@ -26,9 +30,13 @@ public class Category implements Serializable {
 	private Integer id;
 	private String name;
 
-// coleção de prods instanciada para não ser = null (pode ser vazia)	
-// trasiente impede que jpa interprete essa associação	
+/* coleção de prods instanciada para não ser = null (pode ser vazia)	
+   trasiente impede que jpa interprete essa associação antes do mapeamento	
 	@Transient
+   referencia para o mapeamento la do produto (associação s/ '/") . jsonignore para looping postman
+*/
+  	@ManyToMany(mappedBy = "categories")
+ 	
 	private Set<Product> products = new HashSet<>();
 	
  	public Category() {
@@ -56,6 +64,7 @@ public class Category implements Serializable {
 		this.name = name;
 	}
 	
+	@JsonIgnore
  	public Set<Product> getProdutcts() {
 		return products;
 	}

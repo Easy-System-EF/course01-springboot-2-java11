@@ -24,7 +24,7 @@ import com.educandoweb.course.repositories.UserRepository;
 @Profile("test")
 public class TestConfig implements CommandLineRunner {
 
-// injeção de dependencia automatica via spring com anotação: user, order...
+// injeção de dependencia automatica via spring com anotação: user, order, product, category...
 	@Autowired
 	private UserRepository userRepository;
 	
@@ -53,8 +53,19 @@ public class TestConfig implements CommandLineRunner {
 
 		categoryRepository.saveAll(Arrays.asList(cat1, cat2, cat3));
 		productRepository.saveAll(Arrays.asList(p1, p2, p3, p4, p5));
+		
+// dps de salvar categorias e produtos - gerar tb_product_category
+// com pn acessando a coleção de categorias e...		
+		p1.getCategories().add(cat2);
+		p2.getCategories().add(cat1);
+		p2.getCategories().add(cat3);
+		p3.getCategories().add(cat3);
+		p4.getCategories().add(cat3);
+		p5.getCategories().add(cat2);
+		
+		productRepository.saveAll(Arrays.asList(p1, p2, p3, p4, p5));
  		
-		User u1 = new User(null, "Maria Brown", "988888888", "maria@gmail.com", "123456");
+		User u1 = new User(null, "Maria; Brown", "988888888", "maria@gmail.com", "123456");
 		User u2 = new User(null, "Alex Green", "977777777", "alex@gmail.com",  "123456");
 		
 		Order o1 = new Order(null, Instant.parse("2019-06-20T19:53:07Z"), OrderStatus.PAID,  u1);

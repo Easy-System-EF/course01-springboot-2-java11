@@ -13,9 +13,9 @@ import com.educandoweb.course.entities.Category;
 import com.educandoweb.course.service.CategoryService;
 
 //  1a recurso web implementado pelo recurso rest
-//  2a nome do resurso com caminho "/entitie" 
+//  2a nome do resurso com caminho(associação) "/entitie" 
 @RestController
-@RequestMapping(value = "/category")
+@RequestMapping(value = "/categories")
 public class CategoryResource {
 
 // dependencia service transparente	

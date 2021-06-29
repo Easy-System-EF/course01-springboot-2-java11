@@ -13,7 +13,7 @@ import com.educandoweb.course.entities.Product;
 import com.educandoweb.course.service.ProductService;
 
 //1a recurso web implementado pelo recurso rest
-//2a nome do resurso com caminho "/entitie" 
+//2a nome do resurso com caminho(associação) "/entitie" 
 @RestController
 @RequestMapping(value = "/products")
 public class ProductResource {
