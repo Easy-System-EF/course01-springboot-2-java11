@@ -63,7 +63,8 @@ public class Category implements Serializable {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+
+// json aq para evitar looping postman / não funciona 	
 	@JsonIgnore
  	public Set<Product> getProdutcts() {
 		return products;
