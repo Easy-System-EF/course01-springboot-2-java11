@@ -31,9 +31,13 @@ public class User implements Serializable{
 	private String email;
 	private String password;
 
-// instanciando associação user (1) com varios pedidos(0rder)
-//	asociacao um para muitos mapeado por cliente
-// anotação p/ não ter looping (jsonignore)	
+/*	
+    instanciando associação user (1) com varios pedidos(0rder)
+	asociacao um para muitos mapeado por cliente
+    json impede looping e mostra o cliente no pedido -> 
+    o contrario tb e verdade e é conf true q mostra, se for false da erro 500
+	anotação p/ não ter looping (jsonignore)
+*/	
 	@JsonIgnore
 	@OneToMany(mappedBy = "client")
 	private List<Order> orders = new ArrayList<>();

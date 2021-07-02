@@ -2,6 +2,8 @@ package com.educandoweb.course.entities;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.educandoweb.course.entities.enums.OrderStatus;
@@ -37,7 +40,16 @@ public class Order implements Serializable {
 // anotações muitos p/ um e key estrangeira (client
 	@ManyToOne
 	@JoinColumn(name = "client_id")
+// nao instancia pq é um obj	
 	private User client;
+	
+/*
+   preciso de uma coleção (inicializada sempre) de itens p/ relacionamento cliente pedidos
+	é um atributo do pedido (OrderItem)
+	no orderItem eu tenho o id e o id tem o pedido
+*/
+	@OneToMany(mappedBy = "id.order")
+	private Set<OrderItem> items = new HashSet<>();
 	
 	public Order () {
 	}
@@ -84,6 +96,11 @@ public class Order implements Serializable {
 
 	public void setClient(User client) {
 		this.client = client;
+	}
+	
+// o pedido agora conhece seus itens	
+	public Set<OrderItem> getItems() {
+		return items;
 	}
 
 	@Override

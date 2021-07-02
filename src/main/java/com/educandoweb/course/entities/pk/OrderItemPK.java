@@ -20,13 +20,13 @@ public class OrderItemPK implements Serializable {
 
 // muitos para um e nome chave estrangeira nas coleções		
 	@ManyToOne
-	@JoinColumn(name = "product_id")
-	private Product product;
-
-	@ManyToOne
 	@JoinColumn(name = "order_id")
 	private Order order;
 	
+	@ManyToOne
+	@JoinColumn(name = "product_id")
+	private Product product;
+
 	public Product getProduct() {
 		return product;
 	}
