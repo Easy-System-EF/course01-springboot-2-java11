@@ -11,7 +11,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 //anotação para conflito de palavras reservadas, ou aqq mudo o nome da tabela
@@ -45,6 +48,12 @@ public class Product implements Serializable {
 	 inverseJoinColumns = @JoinColumn(name = "category_id"))
 	private Set<Category> categories = new HashSet<>();
 	
+ /* id da classe orderItem
+  * product = orderItemPK 
+  */
+	@OneToMany(mappedBy = "id.product")
+	private Set<OrderItem> items = new HashSet<>();
+ 	
 	public Product() {
 	}
 
@@ -101,6 +110,21 @@ public class Product implements Serializable {
 		return categories;
 	}
  
+/* nome getOrders = diagrama
+ * varrer o orderItem = items
+ * vai montar uma coleção set, q é o resultado da varrida da coleção items
+ * json para o pedido mostrar o(s) produto(s) -> 
+ * invertido com json no orderItem, q mostra produto e pedido(s)
+  */
+	@JsonIgnore
+	public Set<Order> getOrders() {
+		Set <Order> set = new HashSet<>();
+		for (OrderItem x: items) {
+			 set.add(x.getOrder());	 
+		}
+		return set;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

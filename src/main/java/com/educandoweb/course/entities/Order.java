@@ -44,8 +44,9 @@ public class Order implements Serializable {
 	private User client;
 	
 /*
-   preciso de uma coleção (inicializada sempre) de itens p/ relacionamento cliente pedidos
-	é um atributo do pedido (OrderItem)
+   preciso de uma coleção de orderitem itens associados ao order (pedido)
+   (inicializada sempre) de itens p/ relacionamento cliente pedidos
+	PK é um atributo do pedido (OrderItem)
 	no orderItem eu tenho o id e o id tem o pedido
 */
 	@OneToMany(mappedBy = "id.order")
