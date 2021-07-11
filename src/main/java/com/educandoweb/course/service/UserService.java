@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.educandoweb.course.entities.User;
 import com.educandoweb.course.repositories.UserRepository;
+import com.educandoweb.course.service.exceptions.ResourceNotFoundException;
 
 
 // class intermediaria entre controle e repository com regras de negocio
@@ -26,9 +27,13 @@ public class UserService {
 		return repository.findAll();
 	}
 
+/*
+ * trocando o obj.get por obj.orElse -> no caso de nao existir, lança uma exceção
+ */
 	public User findById(Long id) {
 		Optional<User> obj = repository.findById(id);
-		return obj.get();
+//		return obj.get();
+		return obj.orElseThrow(() -> new ResourceNotFoundException(id));
 	}
 	
 	public User insert(User obj) {
@@ -52,7 +57,7 @@ public class UserService {
 	
 /*metodo q atz entity com base no q chegou com obj 
  */
-	private void updateData(User entity, User obj) {
+	private void updateData(User entity	, User obj) {
 		entity.setName(obj.getName());
 		entity.setEmail(obj.getEmail());
 		entity.setTelefone(obj.getTelefone());
