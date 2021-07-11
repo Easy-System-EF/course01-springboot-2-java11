@@ -38,4 +38,23 @@ public class UserService {
 	public void delete(Long id) {
 		repository.deleteById(id);
 	}
+	
+/* User para retornar
+ * metodo com id identificando o usuario e 
+ * o objeto user com os dados a serem atualizados
+ * getOne prepara o obj monitorado par atz e dps efetuar uma operaçao
+ */
+	public User update(Long id, User obj) {
+		User entity = repository.getOne(id);
+		updateData(entity, obj);
+		return repository.save(entity);
+	}
+	
+/*metodo q atz entity com base no q chegou com obj 
+ */
+	private void updateData(User entity, User obj) {
+		entity.setName(obj.getName());
+		entity.setEmail(obj.getEmail());
+		entity.setTelefone(obj.getTelefone());
+	}
  }
